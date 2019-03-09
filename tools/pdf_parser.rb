@@ -50,5 +50,7 @@ lines.each do |line|
 
 end
 
-
-puts JSON.pretty_generate blocks
+puts 'done!'
+File.open('shennong.json', 'w') do |f|
+  f.write JSON.pretty_generate(blocks)
+end

@@ -1,18 +1,26 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn} from 'typeorm'
-
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany, JoinTable, OneToMany} from 'typeorm'
+import { Member } from './Member'
+import { Medicine } from './Medicine'
 @Entity()
 export class Record extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('datetime', { name: 'treatment_at'})
-    treatmentAt: Datetime
+    @Column('datetime')
+    treatmentAt: Date
 
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Datetime
+    @ManyToOne(type => Member, member => member.records)
+    member: Member
+    
+    @ManyToMany(type => Medicine)
+    @JoinTable()
+    medicnes: Medicine[]
 
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Datetime
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
 
 }

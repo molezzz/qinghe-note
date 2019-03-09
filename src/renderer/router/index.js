@@ -22,6 +22,54 @@ export default new Router({
       }]
     },
     {
+      path: '/record',
+      component: Layout,
+      name: 'record',
+      redirect: '/record/list',
+      children: [{
+        path: 'list',
+        component: () => import('@/components/records')
+      }]
+    },
+    {
+      path: '/member',
+      component: Layout,
+      name: 'member',
+      redirect: '/member/list',
+      children: [{
+        path: 'list',
+        component: () => import('@/components/members')
+      }]
+    },
+    {
+      path: '/book',
+      component: Layout,
+      name: 'book',
+      redirect: '/book/list',
+      children: [
+        {
+          path: 'list',
+          component: () => import('@/components/books'),
+          children: [
+            {
+              path: '',
+              component: () => import('@/components/books/medicines')
+            }
+          ]
+        }
+      ]
+    },
+    {
+      path: '/setting',
+      component: Layout,
+      name: 'setting',
+      redirect: '/member/list',
+      children: [{
+        path: 'list',
+        component: () => import('@/components/setting')
+      }]
+    },
+    {
       path: '*',
       redirect: '/'
     }

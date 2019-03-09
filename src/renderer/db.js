@@ -6,7 +6,7 @@ const remote = require('electron').remote
 const app = remote.app
 const basePath = app.getPath('userData')
 const entities = [
-  'Record'
+  'Note', 'Record', 'Member', 'Medicine'
 ].map(name => require('./entity/' + name)[name])
 require('reflect-metadata')
 
