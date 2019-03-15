@@ -1,6 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, Index, OneToMany, ManyToMany, JoinTable} from "typeorm"
-import { Record } from "./Record";
-import { Note } from "./Note";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, Index, OneToMany, ManyToMany} from "typeorm"
+import { Record } from "./Record"
+import { Note } from "./Note"
 
 @Entity()
 export class Medicine extends BaseEntity {
@@ -11,9 +11,19 @@ export class Medicine extends BaseEntity {
   @Index()
   name: string
 
+  @Column({nullable: true})
+  key: string
+
   //别名
   @Column({nullable: true})
   alias: string
+  
+  // 英文名
+  @Column({nullable: true})
+  nameEn: string
+
+  @Column({nullable: true})
+  category: string
 
   @Column({nullable: true})
   xingWei: string
@@ -39,7 +49,11 @@ export class Medicine extends BaseEntity {
   @Column({nullable: true})
   dose: string
 
-  @OneToMany(type => Note, note => note.medicine, {cascade: true})
+  // 线上图片
+  @Column({nullable: true})
+  onlineImg: string
+
+  @OneToMany(type => Note, note => note.medicine, {cascade: true, eager: true})
   notes: Note[]
 
   @ManyToMany(type => Record)

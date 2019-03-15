@@ -97,7 +97,7 @@
                 <Header :style="{padding: 0}" class="layout-header-bar">
                     <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
                 </Header>
-                <Content :style="{margin: '5px', background: '#fff', minHeight: '260px', height: '100%'}">
+                <Content :style="{background: '#fff', minHeight: '260px', height: '100%'}">
                     <transition name="fade-transform" mode="out-in">
                       <router-view/>
                     </transition>

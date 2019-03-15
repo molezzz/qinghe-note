@@ -4,3 +4,5 @@ node_modules/
 build/
 tmp/
 temp/
+tools/fangji_images
+tools/medicine_images

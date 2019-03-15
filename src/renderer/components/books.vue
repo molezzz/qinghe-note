@@ -6,6 +6,10 @@
               <Icon type="ios-leaf" />
               本草
             </MenuItem>
+            <MenuItem name="1-2" :to="{path: '/book/list/formula'}">
+              <Icon type="md-clipboard" />
+              方剂
+            </MenuItem>
             <Submenu name="2">
                 <template slot="title">
                     <Icon type="ios-bookmarks" />
@@ -29,7 +33,7 @@
             </Submenu>
         </Menu>
     </Sider>
-    <Content :style="{ padding: '15px', minHeight: '280px', background: '#fff'}">
+    <Content>
         <router-view />
     </Content>
   </Layout>
@@ -37,7 +41,11 @@
 
 <style lang="sass" scoped>
 .ivu-layout-sider, .ivu-menu-vertical
-  height: 100%
+  height: 100%;
+.ivu-layout-content
+  display: flex;
+  padding: 0;
+  justify-content: stretch;
 </style>
 
 

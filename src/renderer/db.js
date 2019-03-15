@@ -6,7 +6,7 @@ const remote = require('electron').remote
 const app = remote.app
 const basePath = app.getPath('userData')
 const entities = [
-  'Note', 'Record', 'Member', 'Medicine'
+  'Note', 'Record', 'Member', 'Medicine', 'Formula'
 ].map(name => require('./entity/' + name)[name])
 require('reflect-metadata')
 
@@ -25,9 +25,7 @@ export default {
       database: path.join(basePath, 'app.db'),
       entities,
       synchronize: true,
-      logging: {
-        logQueries: true
-      }
+      logging: true
     })
     return typeorm.createConnection(ormConfig)
   }

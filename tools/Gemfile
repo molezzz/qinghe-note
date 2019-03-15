@@ -1,4 +1,6 @@
 source 'https://gems.ruby-china.com'
 
 gem 'pdf-reader'
+gem "selenium-webdriver"
+gem 'chromedriver-helper'
 gem 'kimurai'

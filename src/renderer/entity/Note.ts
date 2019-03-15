@@ -1,5 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne} from 'typeorm'
 import { Medicine } from './Medicine'
+import { Formula } from './Formula'
 
 @Entity()
 export class Note extends BaseEntity {
@@ -18,6 +19,9 @@ export class Note extends BaseEntity {
 
   @ManyToOne(type => Medicine, medicine => medicine.notes)
   medicine: Medicine
+
+  @ManyToOne(type => Formula, formula => formula.notes)
+  formula: Formula
 
   @CreateDateColumn()
   createdAt: Date
