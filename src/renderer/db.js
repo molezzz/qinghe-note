@@ -16,9 +16,6 @@ require('reflect-metadata')
 //   return require('./' + path.join('entity', file))[name]
 // })
 
-console.log(basePath)
-console.log(entities)
-
 export default {
   conn () {
     const ormConfig = Object.assign({}, config, {

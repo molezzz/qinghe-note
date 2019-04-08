@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, Up
 import { Medicine } from './Medicine'
 import { Formula } from './Formula'
 
-@Entity()
+@Entity('note')
 export class Note extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number

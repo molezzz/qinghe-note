@@ -19,12 +19,14 @@ reader.pages.each do |page|
 end
 
 block_lines = {}
-current_line_title = nil
+current_line_title = 
+index = []
 
 lines.each do |line|
-  parts = /(?<sn>[一二三四五六七八九十]{1,})、(?<name>[\w\W]*)?/.match(line)
-  
+  parts = /(?<sn>[一二三四五六七八九十〇○]{1,})、(?<name>[\w\W]*)?/.match(line)
   if parts && parts['name'] && parts['name'] != ''
+    puts parts[:sn]
+    index << parts[:sn]
     blocks[current_block_key] = block_lines
     block_lines = {}
     current_line_title = nil
@@ -51,6 +53,8 @@ lines.each do |line|
 end
 
 puts 'done!'
+# puts index
+puts index.length
 File.open('shennong.json', 'w') do |f|
   f.write JSON.pretty_generate(blocks)
 end

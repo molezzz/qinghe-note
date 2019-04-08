@@ -9,9 +9,17 @@
             <Icon type="ios-leaf"></Icon>
             {{item.name}} <span class="alias" v-if="item.alias && item.alias != ''">（{{item.alias}}）</span>
         </p>
-        <p class="benjing">
-          <span style="margin-left: -0.5em;">【本经原文】</span><br><br> {{item.benJing}}
-        </p>
+        <div class="benjing-image">
+          <p class="benjing">
+            <span style="margin-left: -0.5em;">【本经原文】</span><br><br> {{item.benJing}}
+          </p>
+          <Poptip placement="bottom-end" width="672" v-if="item.onlineImg">
+            <img :src="imageSrc(item)">
+            <div slot="content">
+              <img :src="imageSrc(item)">
+            </div>
+          </Poptip>
+        </div>
         <p class="attr" v-if="item.xingWei && item.xingWei != ''">
           <Tag color="volcano">性味</Tag>
           {{item.xingWei}}
@@ -70,6 +78,18 @@
 .alias
   font-size: 14px;
   color: #999;
+.benjing-image
+  display: flex;
+  align-items: flex-start;
+  .benjing
+    flex-grow: 1;
+  .ivu-poptip
+    min-width: 35%;
+    max-width: 35%;
+    margin-left: 1rem;
+
+    .ivu-poptip-rel img 
+      width: 100%;
 
 </style>
 
@@ -78,6 +98,8 @@
 import { Medicine } from '../../entity/Medicine'
 import { setTimeout } from 'timers'
 import { Like } from 'typeorm'
+import path from 'path'
+import fs from 'fs'
 // import Importer from '../../utils/data_importer'
 
 export default {
@@ -91,7 +113,8 @@ export default {
       loading: false,
       searchBarHeight: 64,
       keywords: null,
-      searchTimeId: null
+      searchTimeId: null,
+      localImages: {}
     }
   },
   methods: {
@@ -121,6 +144,18 @@ export default {
         }, 800)
       })
     },
+    imageSrc (item) {
+      let fileName = this.localImages[item.key]
+      console.log(fileName)
+      if (fileName) {
+        return 'file://' + path.join(__static, 'medicine_images', fileName)
+        // return 'data:image/jpg;base64' + Buffer.from(fs.readFileSync(path.join(__static, 'formula_images', fileName))).toString('base64')
+      }
+      if (item.onlineImg) {
+        return item.onlineImg
+      }
+      return null
+    },
     nextPage () {
       if (this.next === null || this.loading) return
       this.loadData()
@@ -134,6 +169,12 @@ export default {
   },
   mounted () {
     // Importer.importMedicineFromJson(this.$db)
+    // Importer.mergeMedicine(this.$db)
+    fs.readdirSync(path.join(__static, 'medicine_images')).forEach((file) => {
+      // console.log(file)
+      let key = file.split('_')[0]
+      this.localImages[key] = file
+    })
     window.onresize = () => {
       this.pageHeight = this.$refs['page'].offsetHeight - this.searchBarHeight
     }

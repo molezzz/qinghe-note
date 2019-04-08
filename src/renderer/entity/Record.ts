@@ -1,7 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany, JoinTable, OneToMany} from 'typeorm'
 import { Member } from './Member'
 import { Medicine } from './Medicine'
-@Entity()
+@Entity('record')
 export class Record extends BaseEntity {
 
     @PrimaryGeneratedColumn()

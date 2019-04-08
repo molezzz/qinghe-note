@@ -60,6 +60,7 @@
    "dependencies": {
       "@types/node": "^11.10.4",
       "axios": "^0.18.0",
+      "chinese-conv": "^1.0.1",
       "iview": "^3.3.0",
       "reflect-metadata": "^0.1.10",
       "sequelize": "^4.43.0",

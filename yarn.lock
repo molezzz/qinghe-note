@@ -2419,6 +2419,11 @@ check-error@^1.0.2:
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
   integrity sha1-V00xLt2Iu13YkS6Sht1sCu1KrII=
 
+chinese-conv@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/chinese-conv/-/chinese-conv-1.0.1.tgz#c29edcaecf69c2490de86e5d268af71ae2f93051"
+  integrity sha1-wp7crs9pwkkN6G5dJor3GuL5MFE=
+
 chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.3:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.2.tgz#9c23ea40b01638439e0513864d362aeacc5ad058"

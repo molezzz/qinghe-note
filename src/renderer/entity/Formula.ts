@@ -6,7 +6,7 @@ export enum FormulaKind {
   CLASSIC = 1 //经方
 } 
 
-@Entity()
+@Entity('formula')
 export class Formula extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number

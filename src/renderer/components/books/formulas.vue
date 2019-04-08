@@ -11,7 +11,7 @@
         </p>
         <p class="main-col image" v-if="item.onlineImg">
           <span style="margin-left: -0.5em;">【图解】</span><br><br>
-          <img :src="item.onlineImg">
+          <img :src="imageSrc(item)">
         </p>
         <p class="main-col analysis">
           <span style="margin-left: -0.5em;">【组成】</span><br><br>
@@ -122,6 +122,8 @@
 import { setTimeout } from 'timers'
 import { Like } from 'typeorm'
 import { Formula } from '../../entity/Formula'
+import path from 'path'
+import fs from 'fs'
 // import Importer from '../../utils/data_importer'
 
 export default {
@@ -136,6 +138,7 @@ export default {
       searchBarHeight: 64,
       keywords: null,
       searchTimeId: null,
+      localImages: {},
       analysisTableCols: [
         {
           title: '',
@@ -196,6 +199,17 @@ export default {
       this.loading = false
       this.nextPage()
     },
+    imageSrc (item) {
+      let fileName = `${item.key}.jpg`
+      if (this.localImages) {
+        return 'file://' + path.join(__static, 'formula_images', fileName)
+        // return 'data:image/jpg;base64' + Buffer.from(fs.readFileSync(path.join(__static, 'formula_images', fileName))).toString('base64')
+      }
+      if (item.onlineImg) {
+        return item.onlineImg
+      }
+      return null
+    },
     tableData (item) {
       let data = item.analysisTable
       if (!data) return []
@@ -229,6 +243,10 @@ export default {
   },
   mounted () {
     // Importer.importFormulaFromJson(this.$db)
+    fs.readdirSync(path.join(__static, 'formula_images')).forEach((file) => {
+      // console.log(file)
+      this.localImages[file] = true
+    })
     window.onresize = () => {
       this.pageHeight = this.$refs['page'].offsetHeight - this.searchBarHeight
     }
