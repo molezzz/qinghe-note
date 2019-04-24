@@ -8,7 +8,7 @@
       "dom"
     ],
     "target": "es2017",
-    "module": "es2015",
+    "module": "commonjs",  //解决模型引入顺序造成的 XXX not defined 问题  https://stackoverflow.com/questions/48378495/recommended-typescript-config-for-node-8
     "moduleResolution": "node",
     "outDir": "./build",
     "emitDecoratorMetadata": true,

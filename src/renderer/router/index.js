@@ -26,10 +26,16 @@ export default new Router({
       component: Layout,
       name: 'record',
       redirect: '/record/list',
-      children: [{
-        path: 'list',
-        component: () => import('@/components/records')
-      }]
+      children: [
+        {
+          path: 'list',
+          component: () => import('@/components/records')
+        },
+        {
+          path: 'new',
+          component: () => import('@/components/editors/record_editor')
+        }
+      ]
     },
     {
       path: '/member',
