@@ -64,6 +64,10 @@ export default new Router({
             {
               path: 'formula',
               component: () => import('@/components/books/formulas')
+            },
+            {
+              path: 'teacher',
+              component: () => import('@/components/books/teacher_saids')
             }
           ]
         }
@@ -73,10 +77,14 @@ export default new Router({
       path: '/setting',
       component: Layout,
       name: 'setting',
-      redirect: '/member/list',
+      redirect: '/setting/list',
       children: [{
         path: 'list',
         component: () => import('@/components/setting')
+      },
+      {
+        path: 'full_sync',
+        component: () => import('@/components/settings/full_sync')
       }]
     },
     {

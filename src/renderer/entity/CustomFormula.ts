@@ -6,7 +6,8 @@ import { Record } from './Record'
 
 export enum CustomFormulaKind {
   ORAL = 0, // 内服
-  EXTERNAL = 1 //外用
+  EXTERNAL = 1, // 外敷
+  BATH = 2 // 洗浴
 }
 
 @Entity('custom_formula')
@@ -30,6 +31,9 @@ export class CustomFormula extends BaseEntity {
   // 剂量
   dose: String
 
+  // 医嘱
+  @Column('text', { nullable: true })
+  advice: String
   // @OneToMany(type => Note, note => note.customFormula, {cascade: true, eager: true})
   // notes: Note[]
 

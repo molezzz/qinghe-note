@@ -10,6 +10,10 @@
               <Icon type="md-clipboard" />
               方剂
             </MenuItem>
+            <MenuItem name="1-3" :to="{path: '/book/list/teacher'}">
+              <Icon type="ios-glasses" />
+              师说
+            </MenuItem>
             <Submenu name="2">
                 <template slot="title">
                     <Icon type="ios-bookmarks" />

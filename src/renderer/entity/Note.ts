@@ -4,9 +4,9 @@ import { Formula } from './Formula'
 import { Record } from './Record';
 
 export enum NoteKind {
-  BOOK = 0, // 书
-  ZHAO = 1, // 赵老师
-  MY = 2 // 我自己
+  BOOK = 1, // 书
+  ZHAO = 2, // 赵老师
+  MY = 0 // 我自己
 }
 
 @Entity('note')
@@ -14,7 +14,7 @@ export class Note extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ nullable: true })
   key: string
 
   @Column('text')

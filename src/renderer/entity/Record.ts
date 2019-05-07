@@ -9,6 +9,11 @@ export class Record extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({ nullable: true })
+    // 线上中一学堂小程序的ID
+    onlineId: number;
+    
+    @Column({ nullable: true })
     sn: number;
 
     // 就诊时间
