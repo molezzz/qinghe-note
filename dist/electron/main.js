@@ -503,7 +503,66 @@ eval("\n__webpack_require__(/*! electron-debug */ \"./node_modules/electron-debu
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ \"electron\");\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);\n\n\n\n\nif (false) {}\n\nvar mainWindow = void 0;\nvar winURL =  true ? 'http://localhost:9080' : undefined;\n\nfunction createWindow() {\n  mainWindow = new electron__WEBPACK_IMPORTED_MODULE_0__[\"BrowserWindow\"]({\n    height: 563,\n    useContentSize: true,\n    width: 1000,\n    webPreferences: {\n      webSecurity: false\n    }\n  });\n\n  mainWindow.loadURL(winURL);\n  mainWindow.openDevTools();\n\n  mainWindow.on('closed', function () {\n    mainWindow = null;\n  });\n}\n\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on('ready', createWindow);\n\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on('window-all-closed', function () {\n  if (process.platform !== 'darwin') {\n    electron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].quit();\n  }\n});\n\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on('activate', function () {\n  if (mainWindow === null) {\n    createWindow();\n  }\n});\n\n//# sourceURL=webpack:///./src/main/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ \"electron\");\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _renderer_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../renderer/store */ \"./src/renderer/store/index.js\");\n\n\n\n\n\nif (false) {}\n\nvar mainWindow = void 0;\nvar winURL =  true ? 'http://localhost:9080' : undefined;\n\nfunction createWindow() {\n  mainWindow = new electron__WEBPACK_IMPORTED_MODULE_0__[\"BrowserWindow\"]({\n    height: 563,\n    useContentSize: true,\n    width: 1000,\n    webPreferences: {\n      webSecurity: false\n    }\n  });\n\n  mainWindow.loadURL(winURL);\n  mainWindow.openDevTools();\n\n  mainWindow.on('closed', function () {\n    mainWindow = null;\n  });\n}\n\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on('ready', createWindow);\n\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on('window-all-closed', function () {\n  if (process.platform !== 'darwin') {\n    electron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].quit();\n  }\n});\n\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on('activate', function () {\n  if (mainWindow === null) {\n    createWindow();\n  }\n});\n\n//# sourceURL=webpack:///./src/main/index.js?");
+
+/***/ }),
+
+/***/ "./src/renderer/store/index.js":
+/*!*************************************!*\
+  !*** ./src/renderer/store/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"vue\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ \"vuex\");\n/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var vuex_electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex-electron */ \"vuex-electron\");\n/* harmony import */ var vuex_electron__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuex_electron__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules */ \"./src/renderer/store/modules/index.js\");\n\n\n\n\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1___default.a);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (new vuex__WEBPACK_IMPORTED_MODULE_1___default.a.Store({\n  modules: _modules__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n  plugins: [Object(vuex_electron__WEBPACK_IMPORTED_MODULE_2__[\"createPersistedState\"])(), Object(vuex_electron__WEBPACK_IMPORTED_MODULE_2__[\"createSharedMutations\"])()],\n  strict: \"development\" !== 'production'\n}));\n\n//# sourceURL=webpack:///./src/renderer/store/index.js?");
+
+/***/ }),
+
+/***/ "./src/renderer/store/modules sync \\.js$":
+/*!************************************************************!*\
+  !*** ./src/renderer/store/modules sync nonrecursive \.js$ ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var map = {\n\t\"./Counter.js\": \"./src/renderer/store/modules/Counter.js\",\n\t\"./GlobalSearch.js\": \"./src/renderer/store/modules/GlobalSearch.js\",\n\t\"./index.js\": \"./src/renderer/store/modules/index.js\"\n};\n\n\nfunction webpackContext(req) {\n\tvar id = webpackContextResolve(req);\n\treturn __webpack_require__(id);\n}\nfunction webpackContextResolve(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\te.code = 'MODULE_NOT_FOUND';\n\t\tthrow e;\n\t}\n\treturn map[req];\n}\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = \"./src/renderer/store/modules sync \\\\.js$\";\n\n//# sourceURL=webpack:///./src/renderer/store/modules_sync_nonrecursive_\\.js$?");
+
+/***/ }),
+
+/***/ "./src/renderer/store/modules/Counter.js":
+/*!***********************************************!*\
+  !*** ./src/renderer/store/modules/Counter.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar state = {\n  main: 0\n};\n\nvar mutations = {\n  DECREMENT_MAIN_COUNTER: function DECREMENT_MAIN_COUNTER(state) {\n    state.main--;\n  },\n  INCREMENT_MAIN_COUNTER: function INCREMENT_MAIN_COUNTER(state) {\n    state.main++;\n  }\n};\n\nvar actions = {\n  someAsyncTask: function someAsyncTask(_ref) {\n    var commit = _ref.commit;\n\n    commit('INCREMENT_MAIN_COUNTER');\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n\n//# sourceURL=webpack:///./src/renderer/store/modules/Counter.js?");
+
+/***/ }),
+
+/***/ "./src/renderer/store/modules/GlobalSearch.js":
+/*!****************************************************!*\
+  !*** ./src/renderer/store/modules/GlobalSearch.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar state = {\n  type: '',\n  key: '',\n  open: false,\n  localFormulaImages: {},\n  localMedicineImages: {}\n};\n\nvar mutations = {\n  search: function search(state, params) {\n    var type = params.type,\n        key = params.key;\n\n\n    console.log('===================');\n    console.log(type, key);\n    state.type = type;\n    state.key = key;\n    state.open = key && key !== '';\n  },\n  searchOpen: function searchOpen(state, open) {\n    state.open = open;\n  },\n  setLocalImages: function setLocalImages(state, _ref) {\n    var type = _ref.type,\n        data = _ref.data;\n\n    if (type === 'formula') {\n      state.localFormulaImages = data;\n    }\n    if (type === 'medicine') {\n      state.localMedicineImages = data;\n    }\n  }\n};\n\nvar actions = {\n  search: function search(_ref2, _ref3) {\n    var commit = _ref2.commit;\n    var type = _ref3.type,\n        key = _ref3.key;\n\n    commit('search', { type: type, key: key });\n  },\n  searchOpen: function searchOpen(_ref4, val) {\n    var commit = _ref4.commit;\n\n    commit('searchOpen', val);\n  },\n  setLocalImages: function setLocalImages(_ref5, _ref6) {\n    var commit = _ref5.commit;\n    var type = _ref6.type,\n        data = _ref6.data;\n\n    commit('setLocalImages', { type: type, data: data });\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  state: state,\n  mutations: mutations,\n  actions: actions\n});\n\n//# sourceURL=webpack:///./src/renderer/store/modules/GlobalSearch.js?");
+
+/***/ }),
+
+/***/ "./src/renderer/store/modules/index.js":
+/*!*********************************************!*\
+  !*** ./src/renderer/store/modules/index.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n\n\nvar files = __webpack_require__(\"./src/renderer/store/modules sync \\\\.js$\");\nvar modules = {};\n\nfiles.keys().forEach(function (key) {\n  if (key === './index.js') return;\n  modules[key.replace(/(\\.\\/|\\.js)/g, '')] = files(key).default;\n});\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (modules);\n\n//# sourceURL=webpack:///./src/renderer/store/modules/index.js?");
 
 /***/ }),
 
@@ -625,6 +684,39 @@ eval("module.exports = require(\"tty\");\n\n//# sourceURL=webpack:///external_%2
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"util\");\n\n//# sourceURL=webpack:///external_%22util%22?");
+
+/***/ }),
+
+/***/ "vue":
+/*!**********************!*\
+  !*** external "vue" ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"vue\");\n\n//# sourceURL=webpack:///external_%22vue%22?");
+
+/***/ }),
+
+/***/ "vuex":
+/*!***********************!*\
+  !*** external "vuex" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"vuex\");\n\n//# sourceURL=webpack:///external_%22vuex%22?");
+
+/***/ }),
+
+/***/ "vuex-electron":
+/*!********************************!*\
+  !*** external "vuex-electron" ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"vuex-electron\");\n\n//# sourceURL=webpack:///external_%22vuex-electron%22?");
 
 /***/ })
 

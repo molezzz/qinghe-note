@@ -207,6 +207,7 @@ export default {
               note.kind = NoteKind.ZHAO
               note.content = u.records[i].zhaoSirSay
               note.record = newRecord
+              note.key = '赵老师'
 
               await note.save()
               console.log(note)

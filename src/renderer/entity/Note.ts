@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany} from 'typeorm'
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne} from 'typeorm'
 import { Medicine } from './Medicine'
 import { Formula } from './Formula'
 import { Record } from './Record';

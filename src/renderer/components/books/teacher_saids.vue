@@ -72,7 +72,9 @@ export default {
     return {
       next: 1,
       perpage: 2000,
-      notes: []
+      notes: [],
+      contextMenuTarget: null,
+      contextMenuVisible: true
     }
   },
   methods: {
@@ -136,8 +138,9 @@ export default {
       saveAs(new Blob([s2ab(wbout)], { type: '' }), 'zhao_said.xlsx')
     }
   },
-  created () {
+  mounted () {
     this.loadData()
+    this.contextMenuTarget = this.$refs.teacher
   }
 }
 </script>

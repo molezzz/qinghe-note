@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
+// import { remote } from 'electron'
+import contextMenu from 'electron-context-menu'
 
 import App from './App'
 import router from './router'
@@ -35,3 +37,33 @@ db.conn().then((conn) => {
 }).catch((error) => {
   console.log('Error: ', error)
 })
+
+console.log(store)
+
+contextMenu({
+  labels: {
+    copy: '复制',
+    cut: '剪切',
+    paste: '粘贴',
+    saveImage: '保存图片',
+    saveImageAs: '图片另存为...',
+    copyImageAddress: '复制图片地址',
+    copyLink: '复制链接'
+  },
+  prepend: (defaultActions, params, browserWindow) => [{
+    label: '搜本草',
+    visible: params.selectionText !== '',
+    click: (menuItem, browserWindow, event) => {
+      store.dispatch('search', { type: 'medicines', key: params.selectionText })
+    }
+  },
+  {
+    label: '搜方剂',
+    visible: params.selectionText !== '',
+    click: (menuItem, browserWindow, event) => {
+      store.dispatch('search', { type: 'formulas', key: params.selectionText })
+    }
+  }]
+})
+// let mainWindow = remote.browserWindow
+// console.log(mainWindow)
