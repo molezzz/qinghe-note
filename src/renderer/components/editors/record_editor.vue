@@ -164,6 +164,10 @@ export default {
         case '川椒':
           unit = '粒'
           break
+        case '海马':
+        case '海龙':
+          unit = '只'
+          break
         case '蜈蚣':
           unit = '条'
       }

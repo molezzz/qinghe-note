@@ -4,3 +4,4 @@ gem 'pdf-reader'
 gem "selenium-webdriver"
 gem 'chromedriver-helper'
 gem 'kimurai'
+gem 'faraday'
