@@ -44,7 +44,12 @@
         <FormItem class="form-col">
           <span class="inline-label">方</span>
           <div style="flex:2">
-            <Input type="text" placeholder="快捷输入框，例：淡附片 先9" style="margin-bottom: 0.3rem" @on-enter="insertToFormula($event)" />
+            <Input type="text" placeholder="快捷输入，例：熟地黄 先30 / sd x30 3 (表示：熟地黄 (先煎) 30g) " style="margin-bottom: 0.3rem" @on-enter="insertToFormula($event)" @on-keyup="showChoices"/>
+            <div v-if="bcChoices.length > 0">
+              <span v-for="(c,idx) in bcChoices" :key="idx">
+                <Tag color="default" style="margin-left: 0.5rem">{{idx + 1}}</Tag> {{c}}
+              </span>
+            </div>
             <Input v-model="formData.formula" type="textarea" :autosize="{minRows: 6,maxRows:12}" placeholder="方剂详情" />
           </div>
         </FormItem>
@@ -88,9 +93,49 @@ const labels = [
 ]
 const bcMap = {}
 for (let [k, v] of Object.entries(bencao)) {
-  bcMap[v] = k
+  if (bcMap[v]) {
+    bcMap[v].push(k)
+  } else {
+    bcMap[v] = [k]
+  }
 }
 
+const exMap = {
+  '先': '先煎',
+  '后': '后下',
+  '开': '掰开',
+  '去': '去核',
+  '粉': '打粉',
+  '冲': '冲服',
+  '兑': '兑服',
+  '嚼': '嚼服',
+  '烊': '烊化'
+}
+const qExMap = {
+  'X': '先煎',
+  'H': '后下',
+  'K': '掰开',
+  'Q': '去核',
+  'F': '打粉',
+  'C': '冲服',
+  'D': '兑服',
+  'DA': '捣',
+  'J': '嚼服',
+  'Y': '烊化',
+  'B': '包'
+}
+const qOpMap = {
+  'C': '炒',
+  'S': '生',
+  'J': '焦',
+  'CU': '醋',
+  'D': '煅',
+  'Z': '炙',
+  'Y': '盐',
+  'M': '蜜'
+}
+
+const qPrefixReg = /^(c|s|j|cu|d|z|y|m)([^u]+)/i
 // console.log(bcMap)
 export default {
   name: 'App',
@@ -98,7 +143,9 @@ export default {
     return {
       formData: {
         formula: ''
-      }
+      },
+      // 本草候选
+      bcChoices: []
     }
   },
   methods: {
@@ -109,60 +156,41 @@ export default {
         await context.sync()
       })
     },
+    showChoices (evt) {
+      let value = evt.srcElement.value
+      let [input, key] = /^([a-z]+)?\s*/i.exec(value)
+      let choices = []
+      console.log(input, key)
+      if (key) {
+        key = key.toUpperCase()
+        if (bcMap[key]) {
+          choices = choices.concat(bcMap[key])
+        }
+        // 继续查找去掉前缀后是否有匹配
+        let match = qPrefixReg.exec(key)
+        let prefix = match ? (match[1] || '').toUpperCase() : ''
+        let name = match ? (match[2] || '').toUpperCase() : ''
+        if (bcMap[name]) {
+          bcMap[name].forEach((item) => {
+            choices.push(`${qOpMap[prefix] || ''}${item}`)
+          })
+        }
+        this.bcChoices = choices
+      }
+    },
     insertToFormula (evt) {
-      const exMap = {
-        '先': '先煎',
-        '后': '后下',
-        '开': '掰开',
-        '去': '去核',
-        '粉': '打粉',
-        '冲': '冲服',
-        '兑': '兑服',
-        '嚼': '嚼服',
-        '烊': '烊化'
-      }
-      const qExMap = {
-        'X': '先煎',
-        'H': '后下',
-        'K': '掰开',
-        'Q': '去核',
-        'F': '打粉',
-        'C': '冲服',
-        'D': '兑服',
-        'DA': '捣',
-        'J': '嚼服',
-        'Y': '烊化',
-        'B': '包'
-      }
-      const qOpMap = {
-        'C': '炒',
-        'S': '生',
-        'J': '焦',
-        'CU': '醋',
-        'D': '煅',
-        'Z': '炙',
-        'Y': '盐',
-        'M': '蜜'
-      }
-      const qReg = /^([a-zA-Z]+)\s+([a-zA-Z]*)\s*([0-9.]+)?/i
+      const qReg = /^([a-zA-Z]+)\s+([a-zA-Z]*)\s*([0-9.]+)?(\s*\d+)?/i
       const hanReg = /^([\w\W]+)\s+([先后开去粉冲捣兑包嚼，]*)?\s*([0-9.]+)/
-      let val, name, ex, dose
+      let val, name, ex, dose, choice
       console.log(qReg.test(evt.srcElement.value))
       if (qReg.test(evt.srcElement.value)) {
         // 使用音序快捷输入
-        [val, name, ex, dose] = qReg.exec(evt.srcElement.value)
-        let _name = bcMap[name.toUpperCase()]
-        if (!_name) {
-          let match = /^(c|s|j|cu|d|z|y|m)([^u]+)/i.exec(name)
-          let prefix = match ? (match[1] || '').toUpperCase() : ''
-          let n = match ? (match[2] || '').toUpperCase() : ''
-          if (bcMap[n]) {
-            name = `${qOpMap[prefix] || ''}${bcMap[n]}`
-          } else {
-            name = _name
-          }
-        } else {
-          name = _name
+        [val, name, ex, dose, choice] = qReg.exec(evt.srcElement.value)
+        // 用于重名时选取备选词
+        choice = parseInt(choice) || 1
+        // console.log('++++', choice, this.bcChoices)
+        if (this.bcChoices.length > 0) {
+          name = this.bcChoices[choice - 1]
         }
         ex = qExMap[ex.toUpperCase()] || ex
       } else if (hanReg.test(evt.srcElement.value)) {
@@ -203,6 +231,7 @@ export default {
       this.formData.formula = (this.formData.formula || '') + strArr.join(' ') + '；'
       console.log(this.formData.formula)
       evt.srcElement.value = ''
+      this.bcChoices = []
     },
     async handleSubmit () {
       console.log(this.formData)
