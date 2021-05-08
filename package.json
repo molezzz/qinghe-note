@@ -68,7 +68,7 @@
       "reflect-metadata": "^0.1.10",
       "solarlunar": "^2.0.7",
       "sqlite3": "^4.0.3",
-      "typeorm": "0.2.14",
+      "typeorm": "0.2.25",
       "vue": "^2.5.16",
       "vue-class-component": "^7.0.1",
       "vue-electron": "^1.0.6",
